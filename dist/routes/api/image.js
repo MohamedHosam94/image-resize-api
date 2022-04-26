@@ -22,9 +22,17 @@ image.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.send('Image Does Not Exist .. Please add Image');
     }
     else {
-        const cachedFile = yield (0, utils_1.default)(req.query.title, req.query.title);
+        let widthNum;
+        req.query.width == null
+            ? (widthNum = 200)
+            : (widthNum = parseInt(req.query.width));
+        let heightNum;
+        req.query.height == null
+            ? (heightNum = 200)
+            : (heightNum = parseInt(req.query.height));
+        const cachedFile = yield (0, utils_1.default)(req.query.title, req.query.title, widthNum, heightNum);
         res.sendFile(cachedFile);
-        console.log(cachedFile);
+        // console.log(cachedFile , typeof(widthNum));
     }
 }));
 exports.default = image;

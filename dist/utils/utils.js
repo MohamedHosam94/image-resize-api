@@ -18,16 +18,17 @@ const sharp_1 = __importDefault(require("sharp"));
 const resize = (name, width, height, cached) => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, sharp_1.default)(name)
         .resize(width, height)
-        .toFile(path_1.default.join('./storage/cached', `${cached}-cached.jpg`));
+        .toFile(path_1.default.join('./storage/cached', `${cached}-cached-${width}-${height}.jpg`));
+    console.log(width, height);
 });
-const getCachedImg = (cacheName, name) => __awaiter(void 0, void 0, void 0, function* () {
-    if (fs_1.default.existsSync(path_1.default.resolve('./storage', 'cached', `${cacheName}-cached.jpg`))) {
+const getCachedImg = (cacheName, name, width, height) => __awaiter(void 0, void 0, void 0, function* () {
+    if (fs_1.default.existsSync(path_1.default.resolve('./storage', 'cached', `${cacheName}-cached-${width}-${height}.jpg`))) {
         console.log('true it exist');
-        return path_1.default.resolve('./storage', 'cached', `${cacheName}-cached.jpg`);
+        return path_1.default.resolve('./storage', 'cached', `${cacheName}-cached-${width}-${height}.jpg`);
     }
     else {
-        yield resize(path_1.default.resolve('./storage', 'images', `${name}.jpg`), 200, 200, name);
-        return path_1.default.resolve('./storage', 'cached', `${cacheName}-cached.jpg`);
+        yield resize(path_1.default.resolve('./storage', 'images', `${name}.jpg`), width, height, name);
+        return path_1.default.resolve('./storage', 'cached', `${cacheName}-cached-${width}-${height}.jpg`);
     }
 });
 exports.default = getCachedImg;
