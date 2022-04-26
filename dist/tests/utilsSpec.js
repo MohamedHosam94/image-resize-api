@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = __importDefault(require("../utils/utils"));
 describe('Test utilities function', () => {
     it('should contain the cache word', () => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield (0, utils_1.default)('fjord', 'fjord');
+        const result = yield (0, utils_1.default)('fjord', 'fjord', 200, 200);
         expect(result).toContain('-cached');
     }));
 });
