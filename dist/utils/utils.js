@@ -16,6 +16,10 @@ const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const sharp_1 = __importDefault(require("sharp"));
 const resize = (name, width, height, cached) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!fs_1.default.existsSync(path_1.default.resolve('./storage', 'cached'))) {
+        fs_1.default.mkdirSync(path_1.default.resolve('./storage', 'cached'));
+        console.log('dir made');
+    }
     yield (0, sharp_1.default)(name)
         .resize(width, height)
         .toFile(path_1.default.join('./storage/cached', `${cached}-cached-${width}-${height}.jpg`));

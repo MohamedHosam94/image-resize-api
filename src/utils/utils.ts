@@ -10,6 +10,11 @@ const resize = async (
   height: number,
   cached: string
 ): Promise<void> => {
+  if (!fs.existsSync(path.resolve('./storage', 'cached'))) {
+    fs.mkdirSync(path.resolve('./storage', 'cached'));
+    console.log('dir made');
+  }
+
   await sharp(name)
     .resize(width, height)
     .toFile(
